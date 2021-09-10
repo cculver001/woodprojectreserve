@@ -45,14 +45,14 @@ public class ReservationManagerTest {
 	@Test
 	public void testValidReservation() {
 
-		System.out.println("Starting testValidLogin()");
+		System.out.println("Starting testValidReservation()");
 		
 		Reservation reservation = ReservationManager
 				.validateReservation(reservation1);
 		
-		assertNotNull("Authentication Failed", reservation);
+		assertNotNull("Validation Failed", reservation);
 		
-		System.out.println("testValidLogin() \t\t\tPASSED");
+		System.out.println("testValidReservation() \t\t\tPASSED");
 		
 	}
 	
@@ -64,9 +64,9 @@ public class ReservationManagerTest {
 		Reservation reservation = ReservationManager
 				.validateReservation(reservation2);
 		
-		assertNull("Authentication Failed", reservation);
+		assertNull("Validation Failed", reservation);
 		
-		System.out.println("testInvalidLogin() \t\t\tPASSED");
+		System.out.println("testInvalidReservation() \t\t\tPASSED");
 		
 	}
 

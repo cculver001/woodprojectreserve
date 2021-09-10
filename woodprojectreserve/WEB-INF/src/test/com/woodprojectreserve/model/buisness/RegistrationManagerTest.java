@@ -72,7 +72,7 @@ public class RegistrationManagerTest {
 		
 		assertNotNull("Validation Failed", customer);
 		
-		System.out.println("testValidLogin() \t\t\tPASSED");
+		System.out.println("testValidRegistration() \t\t\tPASSED");
 		
 	}
 	
