@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<applicationproperties 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation='ApplicationProperties.xsd'>
+	<servermapping>
+		<server>
+			<key>server.port</key>
+			<value>8189</value>
+		</server>
+		<server>
+			<key>server.timeout</key>
+			<value>300000</value>
+		</server>
+	</servermapping>
+	<databasemapping>
+		<database>
+			<key>jdbc.url</key>
+			<value>jdbc:mysql://localhost:3306</value>
+		</database>
+		<database>
+			<key>jdbc.userid</key>
+			<value>root</value>
+		</database>
+		<database>
+			<key>jdbc.password</key>
+			<value>admin</value>
+		</database>
+	</databasemapping>
+	<servicemapping>
+		<service>
+			<key>IAddressService</key>
+			<value>com.woodprojectreserve.model.service.addressservice.AddressSerciveHibernateImpl</value>
+		</service>
+		<service>
+			<key>IReservationService</key>
+			<value>com.woodprojectreserve.model.service.reservationservice.ReservationSerciveHibernateImpl</value>
+		</service>
+		<service>
+			<key>ILoginService</key>
+			<value>com.woodprojectreserve.model.service.loginservice.LoginServiceImpl</value>
+		</service>
+		<service>
+			<key>ICustomerService</key>
+			<value>com.woodprojectreserve.model.service.customerservice.CustomerSerciveHibernateImpl</value>
+		</service>
+	</servicemapping>
+	<sqlstatementmapping>
+		<sqlstatement>
+			<key>Customer.SelectAll</key>
+			<value>SELECT * FROM sys.customer</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Customer.SelectSpecific</key>
+			<value>SELECT * FROM sys.customer WHERE id = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Customer.Insert</key>
+			<value>INSERT INTO sys.customer (id, firstName, lastName, emailAddress, username, password) VALUES (?, ?, ?, ?, ?, ?)</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Customer.Update</key>
+			<value>UPDATE sys.customer SET firstName = ?, lastName = ?, emailAddress = ?, username = ?, password = ? WHERE id = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Customer.CreateTable</key>
+			<value>CREATE TABLE sys.customer (id varchar(45) NOT NULL, firstName varchar(45) NOT NULL, lastName varchar(45) NOT NULL, emailAddress varchar(45) NOT NULL, username varchar(45) NOT NULL, password varchar(45) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Reservation.SelectAll</key>
+			<value>SELECT * FROM sys.reservation</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Reservation.SelectSpecific</key>
+			<value>SELECT * FROM sys.reservation WHERE id = ? AND userId = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Reservation.SelectSpecificUserID</key>
+			<value>SELECT * FROM sys.reservation WHERE userId = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Reservation.Insert</key>
+			<value>INSERT INTO sys.reservation (id, userId, name, material, woodMain, woodSecondary, finishType, completionDate, detail, active, comment) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Reservation.Update</key>
+			<value>UPDATE sys.reservation SET name = ?, material = ?, woodMain = ?, woodSecondary = ?, finishType = ?, completionDate = ?, detail = ?, active = ?, comment = ? WHERE id = ? AND userId = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Reservation.CreateTable</key>
+			<value>CREATE TABLE sys.reservation (id varchar(45) NOT NULL, userId varchar(45) NOT NULL, name varchar(45) NOT NULL, material varchar(45) NOT NULL, woodMain varchar(45) NOT NULL, woodSecondary varchar(45) NOT NULL, finishType varchar(45) NOT NULL, completionDate varchar(45) NOT NULL, detail varchar(45) NOT NULL, active tinyint DEFAULT NULL, comment longtext, PRIMARY KEY (id, userId)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Address.SelectAll</key>
+			<value>SELECT * FROM sys.address</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Address.SelectSpecific</key>
+			<value>SELECT * FROM sys.address WHERE id = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Address.Insert</key>
+			<value>INSERT INTO sys.address (id, address1, address2, city, state, postalCode, country, telephone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Address.Update</key>
+			<value>UPDATE sys.address SET address1 = ?, address2 = ?, city = ?, state = ?, postalCode = ?, country = ?, telephone = ? WHERE id = ?</value>
+		</sqlstatement>
+		<sqlstatement>
+			<key>Address.CreateTable</key>
+			<value>CREATE TABLE sys.address (id varchar(45) NOT NULL, address1 varchar(45) NOT NULL, address2 varchar(45) DEFAULT NULL, city varchar(45) NOT NULL, state varchar(45) NOT NULL, postalCode varchar(45) NOT NULL, country varchar(45) NOT NULL, telephone varchar(45) NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci</value>
+		</sqlstatement>
+	</sqlstatementmapping>
+	<hqlstatementmapping>
+		<hqlstatement>
+			<key>Customer.HQL.SelectAll</key>
+			<value>FROM Customer</value>
+		</hqlstatement>
+		<hqlstatement>
+			<key>Reservation.HQL.SelectAll</key>
+			<value>FROM Reservation</value>
+		</hqlstatement>
+		<hqlstatement>
+			<key>Address.HQL.SelectAll</key>
+			<value>FROM Address</value>
+		</hqlstatement>
+	</hqlstatementmapping>
+</applicationproperties>
