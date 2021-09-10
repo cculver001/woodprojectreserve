@@ -30,11 +30,7 @@ public class ReservationController extends HttpServlet {
 			
 			Reservation reservation = getReservation(request);
 			
-			System.out.println(reservation);
-			
 			reservation = ReservationManager.validateReservation(reservation);
-			
-			System.out.println(reservation);
 			
 			HttpSession session = request.getSession();
 			
