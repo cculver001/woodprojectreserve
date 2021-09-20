@@ -9,10 +9,28 @@ import com.woodprojectreserve.model.domian.Login;
  * <code>LoginManager</code> class implements a Login Manager 
  * <br><br>
  * 
- * @version - 9.9.2021
+ * @version - 9.18.2021
  * @author Christopher Culver
  */
 public class LoginManager {
+	
+	/** <h1>getCustomer</h1>
+	 * <br> 
+	 * Retrieves <code>Customer</code> object from <code>login</code> 
+	 * object
+	 * <br><br>
+	 * @param login Login
+	 */
+	public static Customer getCustomer(Login login) {
+		
+		Customer customer = new Customer();
+			
+		customer.setUsername(login.getUsername());
+		customer.setPassword(login.getPassword());
+		
+		return customer;
+		
+	}
 	
 	/** <h1>authenticateLogin</h1>
 	 * <br> 
@@ -21,22 +39,22 @@ public class LoginManager {
 	 * <br><br>
 	 * @param login Login
 	 */
-	public static Customer authenticateLogin(Login login) {
+	public static boolean authenticateLogin(Login login) {
 		
-		Customer customer = null;
+		String username = login.getUsername();
+		String password = login.getPassword();
 		
-		if (login.validate()) {
-			
-			customer = new Customer();
-			
-			customer.setUsername(login.getUsername());
-			customer.setPassword(login.getPassword());
-			
-			return customer;
-			
-		} else {
-			return null;
+		if (username == null
+				|| username.length() == 0) {
+			return false;
 		}
+		
+		if (password == null 
+				|| password.length() == 0) {
+			return false;
+		}
+		
+		return true;
 		
 	}
 	

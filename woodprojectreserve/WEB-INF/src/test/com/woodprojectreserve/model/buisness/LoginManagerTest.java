@@ -1,14 +1,13 @@
 
 package test.com.woodprojectreserve.model.buisness;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.woodprojectreserve.model.buisness.LoginManager;
-import com.woodprojectreserve.model.domian.Customer;
 import com.woodprojectreserve.model.domian.Login;
 
 /** <h1>LoginManagerTest</h1>
@@ -16,7 +15,7 @@ import com.woodprojectreserve.model.domian.Login;
  * <code>LoginManagerTest</code> class implements a Login Manager Test
  * <br><br>
  * 
- * @version - 9.10.2021
+ * @version - 9.18.2021
  * @author Christopher Culver
  */
 public class LoginManagerTest {
@@ -54,9 +53,9 @@ public class LoginManagerTest {
 		
 		System.out.println("Starting testValidLogin()");
 		
-		Customer customer = LoginManager.authenticateLogin(login1);
+		boolean result = LoginManager.authenticateLogin(login1);
 		
-		assertNotNull("Authentication Failed", customer);
+		assertTrue("Authentication Failed", result);
 		
 		System.out.println("testValidLogin() \t\t\tPASSED");
 		
@@ -69,25 +68,25 @@ public class LoginManagerTest {
 		
 		System.out.print("\tTesting Zero Length Username...");
 		
-		Customer customer = LoginManager.authenticateLogin(login2);
+		boolean result = LoginManager.authenticateLogin(login2);
 		
-		assertNull("Authentication Failed", customer);
+		assertFalse("Authentication Failed", result);
 		
 		System.out.println("\tPASSED");
 		
 		System.out.print("\tTesting Zero Length Password...");
 		
-		customer = LoginManager.authenticateLogin(login3);
+		result = LoginManager.authenticateLogin(login3);
 		
-		assertNull("Authentication Failed", customer);
+		assertFalse("Authentication Failed", result);
 		
 		System.out.println("\tPASSED");
 		
 		System.out.print("\tTesting Null Values...");
 		
-		customer = LoginManager.authenticateLogin(login4);
+		result = LoginManager.authenticateLogin(login4);
 		
-		assertNull("Authentication Failed", customer);
+		assertFalse("Authentication Failed", result);
 		
 		System.out.println("\t\tPASSED");
 		

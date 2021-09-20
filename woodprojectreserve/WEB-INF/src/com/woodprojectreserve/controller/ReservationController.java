@@ -14,7 +14,7 @@ import com.woodprojectreserve.model.domian.Reservation;
  * <code>ReservationController</code> class implements a Reservation Controller 
  * <br><br>
  * 
- * @version - 9.10.2021
+ * @version - 9.19.2021
  * @author Christopher Culver
  */
 public class ReservationController extends HttpServlet {
@@ -30,11 +30,9 @@ public class ReservationController extends HttpServlet {
 			
 			Reservation reservation = getReservation(request);
 			
-			reservation = ReservationManager.validateReservation(reservation);
-			
 			HttpSession session = request.getSession();
 			
-			if (reservation != null) {
+			if (ReservationManager.validateReservation(reservation)) {
 				
 				String output = "<h1>Reservation Complete</h1><p>" 
 						+ reservation.toString() + "</p>";

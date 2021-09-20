@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head>
+		<title>Reservation</title>
+		<link href="./css/styles.css" rel="stylesheet" type="text/css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			Please enter Reservation Information:<br/>
+			
+			Name <h:inputText value="#{reservation.name}" 
+			required="true"
+			requiredMessage="You must enter a name"/> <br/>
+			
+			Material <h:inputText value="#{reservation.material}" 
+			required="true"
+			requiredMessage="You must enter a material"/> <br/>
+			
+			Wood Type Main <h:inputText value="#{reservation.woodMain}" 
+			required="true"
+			requiredMessage="You must enter a primary wood type"/> <br/>
+			
+			Wood Type Secondary <h:inputText value="#{reservation.woodSecondary}" 
+			required="true"
+			requiredMessage="You must enter a secondary wood type"/> <br/>
+			
+			Finish Type <h:inputText value="#{reservation.finishType}" 
+			required="true"
+			requiredMessage="You must enter a finish type"/> <br/>
+			
+			Completion Date <h:inputText value="#{reservation.completionDate}" 
+			required="true"
+			requiredMessage="You must enter a completion date"/> <br/>
+			
+			Details <h:inputText value="#{reservation.detail}" 
+			required="true"
+			requiredMessage="You must enter detailed information"/> <br/>
+			
+			Comments <h:inputText value="#{reservation.comment}" 
+			required="false"/> <br/>
+			
+			<h:commandButton value="Submit" action="#{reservation.authenticate}"/>
+		</h:form>
+	</h:body>
+</html>

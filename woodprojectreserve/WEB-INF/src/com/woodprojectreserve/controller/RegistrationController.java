@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import com.woodprojectreserve.model.buisness.RegistrationManager;
-import com.woodprojectreserve.model.domian.Address;
 import com.woodprojectreserve.model.domian.Customer;
 
 /** <h1>RegistrationController</h1>
@@ -15,7 +14,7 @@ import com.woodprojectreserve.model.domian.Customer;
  * <code>RegistrationController</code> class implements a R Controller 
  * <br><br>
  * 
- * @version - 9.10.2021
+ * @version - 9.19.2021
  * @author Christopher Culver
  */
 public class RegistrationController extends HttpServlet {
@@ -29,12 +28,11 @@ public class RegistrationController extends HttpServlet {
 		
 		if (source.equals("submit")) {
 			
-			Customer customer = RegistrationManager
-					.validateRegistration(getCustomer(request));
+			Customer customer = getCustomer(request);
 			
 			HttpSession session = request.getSession();
 			
-			if (customer != null) {
+			if (RegistrationManager.validateRegistration(customer)) {
 
 				String output = "<h1>Registration Complete</h1><p>" 
 						+ customer.toString() + "</p>";
@@ -70,25 +68,6 @@ public class RegistrationController extends HttpServlet {
 		String emailAddress = request.getParameter("emailAddress");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
-		Customer customer = new Customer(firstName, lastName, emailAddress, 
-				username, password, new Address());
-
-		customer.setAddress(getAddress(request, customer));
-		
-		return customer;
-		
-	}
-	
-	/** <h1>getAddress</h1>
-	 * <br>
-	 * Pulls address data from HttpServletRequest
-	 * <br><br>
-	 * @param request HttpServletRequest
-	 * @param customer Customer
-	 */
-	private Address getAddress(HttpServletRequest request, Customer customer) {
-		
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		String city = request.getParameter("city");
@@ -97,10 +76,11 @@ public class RegistrationController extends HttpServlet {
 		String country = request.getParameter("country");
 		String telephone = request.getParameter("telephone");
 		
-		Address address = new Address(customer.getId(), address1, address2, city, state, 
-				postalCode, country, telephone);
+		Customer customer = new Customer(firstName, lastName, emailAddress, 
+				username, password, address1, address2, city, state, postalCode,
+				country, telephone);
 		
-		return address;
+		return customer;
 		
 	}
 	

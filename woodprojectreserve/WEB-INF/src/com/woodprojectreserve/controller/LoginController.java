@@ -15,7 +15,7 @@ import com.woodprojectreserve.model.domian.Login;
  * <code>LoginController</code> class implements a Login Controller 
  * <br><br>
  * 
- * @version - 9.10.2021
+ * @version - 9.18.2021
  * @author Christopher Culver
  */
 public class LoginController extends HttpServlet {
@@ -34,11 +34,11 @@ public class LoginController extends HttpServlet {
 		
 		if (source.equals("login")) {
 			
-			Customer customer = LoginManager.authenticateLogin(login);
-			
 			HttpSession session = request.getSession();
 			
-			if (customer != null) {
+			if (LoginManager.authenticateLogin(login)) {
+				
+				Customer customer = LoginManager.getCustomer(login);
 				
 				String output = "<h1>Welcome</h1><p>" + customer.toString() + "</p>";
 				

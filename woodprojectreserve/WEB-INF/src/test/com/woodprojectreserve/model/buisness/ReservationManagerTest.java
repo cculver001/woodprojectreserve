@@ -1,8 +1,8 @@
 
 package test.com.woodprojectreserve.model.buisness;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import com.woodprojectreserve.model.domian.Reservation;
  * Test
  * <br><br>
  * 
- * @version - 9.10.2021
+ * @version - 9.19.2021
  * @author Christopher Culver
  */
 public class ReservationManagerTest {
@@ -47,10 +47,10 @@ public class ReservationManagerTest {
 
 		System.out.println("Starting testValidReservation()");
 		
-		Reservation reservation = ReservationManager
+		boolean result = ReservationManager
 				.validateReservation(reservation1);
 		
-		assertNotNull("Validation Failed", reservation);
+		assertTrue("Validation Failed", result);
 		
 		System.out.println("testValidReservation() \t\t\tPASSED");
 		
@@ -61,10 +61,10 @@ public class ReservationManagerTest {
 		
 		System.out.println("Starting testInvalidReservation()");
 		
-		Reservation reservation = ReservationManager
+		boolean result = ReservationManager
 				.validateReservation(reservation2);
 		
-		assertNull("Validation Failed", reservation);
+		assertFalse("Validation Failed", result);
 		
 		System.out.println("testInvalidReservation() \t\t\tPASSED");
 		

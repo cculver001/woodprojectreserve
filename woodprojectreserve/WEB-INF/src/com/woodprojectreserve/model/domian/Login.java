@@ -2,14 +2,21 @@ package com.woodprojectreserve.model.domian;
 
 import java.util.Objects;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import com.woodprojectreserve.model.buisness.LoginManager;
+
 /** <h1>Login</h1>
  * <br>
  * <code>Login</code> object that defines a login of the WoodProjectReserve application.    
  * <br><br>
  * 
- * @version - 9.5.2021
+ * @version - 9.18.2021
  * @author Christopher Culver
  */
+@ManagedBean
+@SessionScoped
 public class Login {
 	
 	private String username;
@@ -53,27 +60,21 @@ public class Login {
 		this.password = password;
 	}
 	
-	/** <h1>validate</h1>
+	/** <h1>authenticate</h1>
 	 * <br>
-	 * Validates <code>Login</code> object by checking for null values
+	 * Authenticates <code>Login</code> object
 	 * <br>
 	 * <br><br>
 	 * 
-	 * @return the validation
+	 * @return the view
 	 */
-	public boolean validate() {
+	public String authenticate() {
 		
-		if (username == null
-				|| username.length() == 0) {
-			return false;
+		if (LoginManager.authenticateLogin(this)) {
+			return "reservation";
+		} else {
+			return "error-page";
 		}
-		
-		if (password == null 
-				|| password.length() == 0) {
-			return false;
-		}
-		
-		return true;
 		
 	}
 

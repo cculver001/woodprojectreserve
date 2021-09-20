@@ -3,7 +3,11 @@ package com.woodprojectreserve.model.domian;
 
 import java.io.Serializable;
 import java.util.Hashtable;
-import java.util.Set;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import com.woodprojectreserve.model.buisness.RegistrationManager;
 
 /** <h1>Customer</h1>
  * <br>
@@ -11,10 +15,11 @@ import java.util.Set;
  * Includes <code>Reservation</code> and <code>Address</code> objects.   
  * <br><br>
  * 
- * @version - 9.10.2021
+ * @version - 9.18.2021
  * @author Christopher Culver
  */
-
+@ManagedBean
+@SessionScoped
 public class Customer implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -25,7 +30,13 @@ public class Customer implements Serializable {
 	private String emailAddress;
 	private String username;
 	private String password;
-	private Address address;
+	private String address1;
+	private String address2;
+	private String city;
+	private String state;
+	private String postalCode;
+	private String country;
+	private String telephone;
 	private Hashtable<Integer, Reservation> reservation;
 	
 	/** <h1>Customer</h1>
@@ -56,7 +67,13 @@ public class Customer implements Serializable {
 			String emailAddress, 
 			String username, 
 			String password,
-			Address address, 
+			String address1, 
+			String address2, 
+			String city, 
+			String state, 
+			String postalCode, 
+			String country,
+			String telephone, 
 			Hashtable<Integer, Reservation> reservation) {
 		this.id = generateId(firstName, lastName, username);
 		this.firstName = firstName;
@@ -64,7 +81,13 @@ public class Customer implements Serializable {
 		this.emailAddress = emailAddress;
 		this.username = username;
 		this.password = password;
-		this.address = address;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.city = city;
+		this.state = state;
+		this.postalCode = postalCode;
+		this.country = country;
+		this.telephone = telephone;
 		this.reservation = reservation;
 	}
 
@@ -86,41 +109,26 @@ public class Customer implements Serializable {
 			String emailAddress, 
 			String username, 
 			String password,
-			Address address) {
+			String address1, 
+			String address2, 
+			String city, 
+			String state, 
+			String postalCode, 
+			String country,
+			String telephone) {
 		this.id = generateId(firstName, lastName, username);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
 		this.username = username;
 		this.password = password;
-		this.address = address;
-		this.reservation = new Hashtable<Integer, Reservation>();
-	}
-	
-	/** <h1>Customer</h1>
-	 * 
-	 * <br>
-	 * Constructor, builds <code>Customer</code> object without <code>Reservation and Address</code> object
-	 * <br><br>
-	 * @param firstName - first name
-	 * @param lastName - last name
-	 * @param emailAddress - email address
-	 * @param username - user name
-	 * @param password - password
-	 */
-	public Customer(
-			String firstName, 
-			String lastName, 
-			String emailAddress, 
-			String username, 
-			String password) {
-		this.id = generateId(firstName, lastName, username);
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailAddress = emailAddress;
-		this.username = username;
-		this.password = password;
-		this.address = new Address();
+		this.address1 = address1;
+		this.address2 = address2;
+		this.city = city;
+		this.state = state;
+		this.postalCode = postalCode;
+		this.country = country;
+		this.telephone = telephone;
 		this.reservation = new Hashtable<Integer, Reservation>();
 	}
 
@@ -294,96 +302,140 @@ public class Customer implements Serializable {
 		this.reservation.remove(key);
 	}
 	
-	/** <h1>getAddress</h1>
-	 * 
+	/** <h1>getAddress1</h1>
 	 * <br>
-	 * @return the address
+	 * @return the address1
 	 */
-	public Address getAddress() {
-		return address;
+	public String getAddress1() {
+		return address1;
 	}
 
-	/** <h1>setAddress</h1>
-	 * 
+	/** <h1>setAddress1</h1>
 	 * <br>
-	 * @param address the address to set
+	 * @param address1 the address1 to set
 	 */
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
 	}
 
-	/** <h1>validate</h1>
-	 * 
-	 * <br> 
-	 * Validates Customer object by checking for null values
-	 * Reservation list is also validated as part of the reference
-	 * 
-	 * @return the validation
+	/** <h1>getAddress2</h1>
+	 * <br>
+	 * @return the address2
 	 */
-	public boolean validate() {
+	public String getAddress2() {
+		return address2;
+	}
+
+	/** <h1>setAddress2</h1>
+	 * <br>
+	 * @param address2 the address2 to set
+	 */
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	/** <h1>getCity</h1>
+	 * <br>
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/** <h1>setCity</h1>
+	 * <br>
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	/** <h1>getState</h1>
+	 * <br>
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/** <h1>setState</h1>
+	 * <br>
+	 * @param state the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/** <h1>getPostalCode</h1>
+	 * <br>
+	 * @return the postalCode
+	 */
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	/** <h1>setPostalCode</h1>
+	 * <br>
+	 * @param postalCode the postalCode to set
+	 */
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	/** <h1>getCountry</h1>
+	 * <br>
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
+	}
+
+	/** <h1>setCountry</h1>
+	 * <br>
+	 * @param country the country to set
+	 */
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	/** <h1>getTelephone</h1>
+	 * <br>
+	 * @return the telephone
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	/** <h1>setTelephone</h1>
+	 * <br>
+	 * @param telephone the telephone to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	/** <h1>authenticate</h1>
+	 * <br>
+	 * Authenticates <code>Customer</code> object
+	 * <br>
+	 * <br><br>
+	 * 
+	 * @return the view
+	 */
+	public String authenticate() {
 		
-		boolean result = true;
+		this.id = "0";
+		this.reservation = new Hashtable<Integer, Reservation>();
 		
-		if (id == null 
-				|| id.length() == 0) {
-			result = false;
-		}
-		
-		if (firstName == null
-				|| firstName.length() == 0) {
-			result = false;
-		}
-		
-		if (lastName == null
-				|| lastName.length() == 0) {
-			result = false;
-		}
-		
-		if (emailAddress == null
-				|| emailAddress.length() == 0) {
-			result = false;
-		}
-		
-		if (username == null
-				|| username.length() == 0) {
-			result = false;
-		}
-		
-		if (password == null
-				|| password.length() == 0) {
-			result = false;
-		}
-		
-		if (address == null) {
-			result = false;
-		} else if (result == true) {
-			result = address.validate();
-		}
-		
-		if (reservation != null) {
-		
-			if (reservation.size() > 0) {
-				
-				Set<Integer> keys = reservation.keySet();
-				
-				for (int key : keys) {
-					
-					Reservation res = reservation.get(key);
-					
-					if (res.validate() == false) {
-						result = false;
-						break;
-					}
-					
-				}
-				
-			}
-			
+		if (RegistrationManager.validateRegistration(this)) {
+			return "login";
 		} else {
-			result = false;
+			return "error-page";
 		}
-		
-		return result;
+	}
+	
+	public String registrationPage() {
+		return "registration";
 	}
 	
 	@Override
@@ -392,7 +444,14 @@ public class Customer implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((address1 == null) ? 0 : address1.hashCode());
+		result = prime * result + ((address2 == null) ? 0 : address2.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
 		result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -418,13 +477,83 @@ public class Customer implements Serializable {
 		
 		Customer other = (Customer) obj;
 		
-		if (address == null) {
-		
-			if (other.address != null) {
+		if (address1 == null) {
+			
+			if (other.address1 != null) {
 				return false;
 			}
 			
-		} else if (!address.equals(other.address)) {
+		} else if (!address1.equals(other.address1)) {
+			return false;
+		}
+		
+		if (address2 == null) {
+			
+			if (other.address2 != null) {
+				return false;
+			}
+			
+		} else if (!address2.equals(other.address2)) {
+			return false;
+		}
+		
+		if (city == null) {
+			
+			if (other.city != null) {
+				return false;
+			}
+			
+		} else if (!city.equals(other.city)) {
+			return false;
+		}
+		
+		if (country == null) {
+			
+			if (other.country != null) {
+				return false;
+			}
+			
+		} else if (!country.equals(other.country)) {
+			return false;
+		}
+		
+		if (id == null) {
+			
+			if (other.id != null) {
+				return false;
+			}
+			
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		
+		if (postalCode == null) {
+			
+			if (other.postalCode != null) {
+				return false;
+			}
+			
+		} else if (!postalCode.equals(other.postalCode)) {
+			return false;
+		}
+		
+		if (state == null) {
+			
+			if (other.state != null) {
+				return false;
+			}
+			
+		} else if (!state.equals(other.state)) {
+			return false;
+		}
+		
+		if (telephone == null) {
+			
+			if (other.telephone != null) {
+				return false;
+			}
+			
+		} else if (!telephone.equals(other.telephone)) {
 			return false;
 		}
 		
@@ -571,10 +700,45 @@ public class Customer implements Serializable {
 			builder.append(password);
 			builder.append(", ");
 		}
-		if (address != null) {
-			builder.append("address=");
-			builder.append(address);
+		if (address1 != null) {
+			builder.append("address1=");
+			builder.append(address1);
 			builder.append(", ");
+		}
+		
+		if (address2 != null) {
+			builder.append("address2=");
+			builder.append(address2);
+			builder.append(", ");
+		}
+		
+		if (city != null) {
+			builder.append("city=");
+			builder.append(city);
+			builder.append(", ");
+		}
+		
+		if (state != null) {
+			builder.append("state=");
+			builder.append(state);
+			builder.append(", ");
+		}
+		
+		if (postalCode != null) {
+			builder.append("postalCode=");
+			builder.append(postalCode);
+			builder.append(", ");
+		}
+		
+		if (country != null) {
+			builder.append("country=");
+			builder.append(country);
+			builder.append(", ");
+		}
+		
+		if (telephone != null) {
+			builder.append("telephone=");
+			builder.append(telephone);
 		}
 		if (reservation != null) {
 			builder.append("reservation=");

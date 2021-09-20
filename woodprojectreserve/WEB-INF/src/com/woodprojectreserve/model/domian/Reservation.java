@@ -3,15 +3,21 @@ package com.woodprojectreserve.model.domian;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import com.woodprojectreserve.model.buisness.ReservationManager;
+
 /** <h1>Reservation</h1>
  * <br>
  * <code>Reservation</code> object that defines a <code>Reservation</code> within WoodProjectReserve application. 
  * <br><br>
  * 
- * @version - 9.5.2021
+ * @version - 9.19.2021
  * @author Christopher Culver
  */
-
+@ManagedBean
+@SessionScoped
 public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -287,50 +293,24 @@ public class Reservation implements Serializable {
 		this.comment = comment;
 	}
 	
-	/** <h1>validate</h1>
+	/** <h1>authenticate</h1>
 	 * <br>
-	 * Validates <code>Reservation</code> object by checking for null values
+	 * Authenticates <code>Customer</code> object
 	 * <br>
-	 * <b>Note:</b> Attribute <code>comment</code> is allowed to be null; this indicates
-	 * a new reservation
+	 * <br><br>
 	 * 
-	 * @return the validation
+	 * @return the view
 	 */
-	public boolean validate() {
+	public String authenticate() {
 		
-		if (userId == null || userId.length() == 0) {
-			return false;
+		this.userId = "cutomer";
+		this.active = false;
+		
+		if (ReservationManager.validateReservation(this)) {
+			return "reservation-complete";
+		} else {
+			return "error-page";
 		}
-		
-		if (name == null || name.length() == 0) {
-			return false;
-		}
-		
-		if (material == null || material.length() == 0) {
-			return false;
-		}
-		
-		if (woodMain == null || woodMain.length() == 0) {
-			return false;
-		}
-		
-		if (woodSecondary == null || woodSecondary.length() == 0) {
-			return false;
-		}
-		
-		if (finishType == null || finishType.length() == 0) {
-			return false;
-		}
-		
-		if (completionDate == null || completionDate.length() == 0) {
-			return false;
-		}
-		
-		if (detail == null || detail.length() == 0) {
-			return false;
-		}
-		
-		return true;
 		
 	}
 
